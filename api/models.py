@@ -12,9 +12,17 @@ class CustomUser(AbstractUser):
 class Habit(models.Model):
     name = models.TextField()
     description = models.TextField()
-    status = models.BooleanField()
+    is_done_today = models.BooleanField()
     start_date = models.TextField()
     is_active = models.BooleanField()
     is_completed = models.BooleanField()
     target_days = models.PositiveIntegerField()
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+
+
+class Progress(models.Model):
+    habit = models.ForeignKey(Habit, on_delete=models.CASCADE)
+    is_done_today = models.BooleanField()
+    date = models.DateTimeField()
+
+
